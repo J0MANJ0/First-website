@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DIGITAL CLOCK</title>
+    <link rel="stylesheet" href="digitalClock.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="clock" title="JOMANJO-CLOCK.">
+        <div class="day-date">
+          <span id="day" title="DAY"></span>
+          <span id="date" title="DATE"></span>
+          <span id="month" title="MONTH"></span>
+          <span id="year" title="YEAR"></span>
+        </div>
+        <ul>
+          <li id="hours" title="HOURS"></li>
+          <li id="point">:</li>
+          <li id="minutes" title="MINUTES"></li>
+          <li id="point">:</li>
+          <li id="seconds" title="SECONDS"></li>
+          <li id="point">.</li>
+          <li id="am-pm" title="AM-AFTER-MIDNIGHT PM-PAST-MIDDAY"></li>
+        </ul>
+      </div>
+    </div>
+  </body>
+  <script>
+    const clock = () => {
+      let dayNames = [
+        "SUNDAY",
+        "MONDAY",
+        "TUESDAY",
+        "WEDNESDAY",
+        "THURSDAY",
+        "FRIDAY",
+        "SATURDAY",
+      ];
+
+      let monthNames = [
+        "JANUARY",
+        "FEBRUARY",
+        "MARCH",
+        "APRIL",
+        "MAY",
+        "JUNE",
+        "JULY",
+        "AUGUST",
+        "SEPTEMBER",
+        "OCTOBER",
+        "NOVEMBER",
+        "DECEMBER",
+      ];
+
+      let todayDate = new Date();
+
+      document.getElementById("day").innerHTML = dayNames[todayDate.getDay()];
+      document.getElementById("date").innerHTML = todayDate.getDate();
+      document.getElementById("month").innerHTML =
+        monthNames[todayDate.getMonth()];
+      document.getElementById("year").innerHTML = todayDate.getFullYear();
+
+      let h = todayDate.getHours();
+      let m = todayDate.getMinutes();
+      let s = todayDate.getSeconds();
+
+      // if (h <= 11 && m < 60) {
+      //   document.getElementById("am-pm").innerHTML = "AM";
+      // } else {
+      //   document.getElementById("am-pm").innerHTML = "PM";
+      // }
+
+      h <= 11 && m < 60
+        ? (document.getElementById("am-pm").innerHTML = "AM")
+        : (document.getElementById("am-pm").innerHTML = "PM");
+      if (h > 12) {
+        h -= 12;
+      }
+
+      if (h === 0) {
+        h += 12;
+      }
+
+      h = h < 10 ? "0" + h : h;
+      m = m < 10 ? "0" + m : m;
+      s = s < 10 ? "0" + s : s;
+
+      document.getElementById("hours").innerHTML = h;
+      document.getElementById("minutes").innerHTML = m;
+      document.getElementById("seconds").innerHTML = s;
+    };
+
+    let interval = setInterval(clock, 400);
+  </script>
+</html>
